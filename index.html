@@ -543,11 +543,12 @@ body.light-mode {
 
     <!-- Música de fondo -->
 
-    <audio controls>
-        <source src="./img/audio1.mp3" type="audio/mpeg">
-      </audio>
-      
-    <button class="music-btn" onclick="toggleMusic()">Reproducir música</button>
+    
+    <audio id="audio" style="display: none;">
+<source src="./img/audio1.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="toggleMusic()">Reproducir música</button>
 
     <script>
         // Modo oscuro y claro
@@ -593,16 +594,22 @@ body.light-mode {
             document.getElementById('boxModal').style.display = 'none';
         }
 
-        // Música
-        function toggleMusic() {
-            const music = document.getElementById('backgroundMusic');
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
-        }
+
+
+
+    var audio = document.getElementById("audio");
+
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+
     </script>
+
+    
     <script>
         document.getElementById("discoverBtn").addEventListener("click", function() {
             this.style.display = "none"; // Oculta el botón al hacer clic
