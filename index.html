@@ -403,19 +403,6 @@ body.light-mode {
     cursor: pointer;
     border-radius: 10px;
 }
-.game-container {
-    width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-  }
-  .question {
-    margin-bottom: 10px;
-  }
-  .hint {
-    color: green;
-    margin-top: 5px;
-  }
 
     </style>
 </head>
@@ -470,79 +457,55 @@ body.light-mode {
 <div class="game-container">
     <h2>¡Un juego sobre nosotros!</h2>
     <p>¿Cuánto recuerdas sobre nuestra relación? Responde las preguntas con cariño. <3</p>
-  
-    <div id="question1" class="question">
-      <p><strong>Pregunta 1:</strong> ¿Dónde fue nuestra primera cita?</p>
-      <button onclick="checkAnswer('question1', 'Parque', 1)">En el parque</button>
-      <button onclick="checkAnswer('question1', 'Restaurante', 1)">En el restaurante</button>
-      <button onclick="checkAnswer('question1', 'Cine', 1)">En el cine</button>
-      <button onclick="giveHint('question1', 1)">Pista</button>
-      <div id="hint1" class="hint" style="display:none;">Es un lugar al aire libre donde pasamos mucho tiempo.</div>
+    
+    <div id="question1">
+        <p><strong>Pregunta 1:</strong> ¿Dónde fue nuestra primera cita?</p>
+        <button onclick="checkAnswer('question1', 'Parque')">En el parque</button>
+        <button onclick="checkAnswer('question1', 'Restaurante')">En el restaurante</button>
+        <button onclick="checkAnswer('question1', 'Cine')">En el cine</button>
+        <button onclick="giveHint('question1')">Pista</button>
+        <div id="hint1" style="display:none; color: green;">Es un lugar al aire libre donde pasamos mucho tiempo.</div>
     </div>
-  
-    <div id="question2" class="question" style="display:none;">
-      <p><strong>Pregunta 2:</strong> ¿Con qué canción te acuerdas de mí?</p>
-      <button onclick="checkAnswer('question2', 'Perfect de Ed Sheeran', 2)">Perfect de Ed Sheeran</button>
-      <button onclick="checkAnswer('question2', 'Shape of You', 2)">Shape of You</button>
-      <button onclick="checkAnswer('question2', 'La Vie en Rose', 2)">La Vie en Rose</button>
-      <button onclick="giveHint('question2', 2)">Pista</button>
-      <div id="hint2" class="hint" style="display:none;">Es una canción romántica/triste de Junior H.</div>
+
+    <div id="question2" style="display:none;">
+        <p><strong>Pregunta 2:</strong> ¿Con que cancion te acuerdas de mi?</p>
+        <button onclick="checkAnswer('question2', 'Perfect de Ed Sheeran')">1004 km</button>
+        <button onclick="checkAnswer('question2', 'Shape of You')">Shape of You</button>
+        <button onclick="checkAnswer('question2', 'La Vie en Rose')">La Vie en Rose</button>
+        <button onclick="giveHint('question2')">Pista</button>
+        <div id="hint2" style="display:none; color: green;">Es una canción romántica/triste de junior h.</div>
     </div>
-  
+
+    <div id="question3" style="display:none;">
+        <p><strong>Pregunta 3:</strong> ¿Cuál es el lugar que soñamos visitar juntos?</p>
+        <button onclick="checkAnswer('question3', 'París')">Nueva Orleans</button>
+        <button onclick="checkAnswer('question3', 'Tokio')">Escosia</button>
+        <button onclick="checkAnswer('question3', 'Roma')">Roma</button>
+        <button onclick="giveHint('question3')">Pista</button>
+        <div id="hint3" style="display:none; color: green;">Nos queremos casar ahi.</div>
     </div>
-  
+
+    <div id="question4" style="display:none;">
+        <p><strong>Pregunta 4:</strong> ¿Que es una de las cosas que nos dio verguenza las primeras veces?</p>
+        <button onclick="checkAnswer('question4', 'Un perro')">Pedito</button>
+        <button onclick="checkAnswer('question4', 'Un gato')">Beso</button>
+        <button onclick="checkAnswer('question4', 'Un elefante')">Bañarnos Juntos</button>
+        <button onclick="giveHint('question4')">Pista</button>
+        <div id="hint4" style="display:none; color: green;">Silencioso y huele feito.</div>
+    </div>
+
     <div id="endGame" style="display:none;">
-      <h3>¡Felicidades, has completado el juego!</h3>
-      <p>¡¡¡ TE AMO !!!<3</p>
-      <button onclick="showSurprise()">¡Abre tu sorpresa!</button>
+        <h3>¡Felicidades, has completado el juego!</h3>
+        <p> ¡¡¡ TE AMO !!!<3</p>
+        <button onclick="showSurprise()">¡Abre tu sorpresa!</button>
     </div>
-  
-    <div id="surprise" style="display: none;">
-      <h2>Tu sorpresa:</h2>
-      <p>Te amo mucho, mi vida. Cada día a tu lado es un regalo. </p>
-      <img src="./img/ft6.jpg" alt="Imagen sorpresa" />
+
+    <div id="surprise" >
+        <h2>Tu sorpresa:</h2>
+        <p>Te amo mucho, mi vida. Cada día a tu lado es un regalo. 💖</p>
+        <img src="./img/ft6.jpg" alt="Imagen sorpresa" />
     </div>
-  </div>
-  
-  <script>
-  let currentQuestion = 1;
-  let score = 0;
-  
-  function checkAnswer(questionId, correctAnswer, questionNumber) {
-    const userAnswer = document.querySelector(`#${questionId} button[onclick*="${correctAnswer}"]`);
-    if (userAnswer) {
-      score++;
-    }
-  
-    hideQuestion(questionNumber);
-    showNextQuestion(questionNumber + 1);
-  }
-  
-  function giveHint(questionId, questionNumber) {
-    document.getElementById(`hint${questionNumber}`).style.display = "block";
-  }
-  
-  function hideQuestion(questionNumber) {
-    document.getElementById(`question${questionNumber}`).style.display = "none";
-  }
-  
-  function showNextQuestion(questionNumber) {
-    if (document.getElementById(`question${questionNumber}`)) {
-      document.getElementById(`question${questionNumber}`).style.display = "block";
-      currentQuestion = questionNumber;
-    } else {
-      showEndGame();
-    }
-  }
-  
-  function showEndGame() {
-      document.getElementById("endGame").style.display = "block";
-  }
-  
-  function showSurprise() {
-    document.getElementById("surprise").style.display = "block";
-  }
-  </script>
+</div>
 
 <script>
     // Función para verificar la respuesta
